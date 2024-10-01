@@ -35,9 +35,17 @@ export class UserRepository extends Repository<User> implements IUserRepository 
     return result.rows[0];
   }
 
-  public async delete(id: number): Promise<boolean> {
+  public async remove(id: number): Promise<boolean> {
     const result = await this.connection.query(`DELETE FROM "${this.table}" WHERE id = $1`, [id]);
 
     return result.rowCount === 1;
+  }
+
+  public async findByEmail(email: string): Promise<User | null> {
+    const result = await this.connection.query(`SELECT * FROM "${this.table}" WHERE email = $1`, [email]);
+
+    if (result.rowCount === 0) return null;
+
+    return result.rows[0];
   }
 }

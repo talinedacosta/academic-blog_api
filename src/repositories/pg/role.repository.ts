@@ -5,6 +5,6 @@ import { IRoleRepository } from "../interfaces/role.repository.interface";
 
 export class RoleRepository extends Repository<Role> implements IRoleRepository {
   constructor(conn: PoolClient) {
-    super(conn, "roles", { unique_identifier: "id" });
+    super(conn, "role", { unique_identifier: "id" });
   }
 }
