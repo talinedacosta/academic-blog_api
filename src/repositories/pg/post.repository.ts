@@ -2,8 +2,9 @@ import { Post } from "@/entities/post.entity";
 import { Repository } from "./default.repository";
 import { User } from "@/entities/user.entity";
 import { PoolClient } from "pg";
+import { IPostRepository } from "../interfaces/post.repository.interface";
 
-export class PostRepository extends Repository<Post> {
+export class PostRepository extends Repository<Post> implements IPostRepository {
   constructor(conn: PoolClient) {
     super(conn, "post", { unique_identifier: "id" });
   }

@@ -8,7 +8,7 @@ export abstract class Repository<T> {
   }
 
   async findById(unique_identifier?: string | number): Promise<T | null> {
-    const result = await this.connection.query(`SELECT * FROM ${this.table} WHERE ${this.unique_identifier} = $1`, [unique_identifier]);
+    const result = await this.connection.query(`SELECT * FROM "${this.table}" WHERE ${this.unique_identifier} = $1`, [unique_identifier]);
 
     if (result.rowCount === 0) return null;
 

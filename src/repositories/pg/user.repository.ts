@@ -1,8 +1,9 @@
 import { User } from "@/entities/user.entity";
 import { Repository } from "./default.repository";
 import { PoolClient } from "pg";
+import { IUserRepository } from "../interfaces/user.repository.interface";
 
-export class UserRepository extends Repository<User> {
+export class UserRepository extends Repository<User> implements IUserRepository {
   constructor(conn: PoolClient) {
     super(conn, "user", { unique_identifier: "id" });
   }
