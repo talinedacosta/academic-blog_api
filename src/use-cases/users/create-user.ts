@@ -1,8 +1,8 @@
 import { User } from "@/entities/user.entity";
-import { UserRepository } from "@/repositories/user.repository";
+import { IUserRepository } from "@/repositories/interfaces/user.repository.interface";
 
 export class CreateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: IUserRepository) {}
 
   handler(user: User): Promise<User> {
     return this.userRepository.create(user);

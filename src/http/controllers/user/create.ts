@@ -3,6 +3,7 @@ import { z } from "zod";
 import { database } from "@/lib/pg/db";
 import { User } from "@/entities/user.entity";
 import { UserRepository } from "@/repositories/user.repository";
+import { UserRepository } from "@/repositories/pg/user.repository";
 import { CreateUserUseCase } from "@/use-cases/users/create-user";
 
 export async function create(request: Request, response: Response) {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import { Post } from "@/entities/post.entity";
-import { PostRepository } from "@/repositories/post.repository";
+import { PostRepository } from "@/repositories/pg/post.repository";
 import { CreatePostUseCase } from "@/use-cases/posts/create-post";
 import { database } from "@/lib/pg/db";
 import { User } from "@/entities/user.entity";
