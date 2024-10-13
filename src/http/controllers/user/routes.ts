@@ -9,8 +9,6 @@ const router = express.Router();
 
 router.post("/user/login", login);
 router.post("/user", create);
-
-
 router.get("/user/:id", auth, findById);
 router.delete("/user/:id", auth, remove);
 

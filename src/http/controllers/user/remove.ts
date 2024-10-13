@@ -20,8 +20,8 @@ export async function remove(request: Request , response: Response, next: NextFu
     const user = { id: Number(token.id), role_id: token.role_id } as User;
     
     const roleRepository = new RoleRepository(database.clientInstance);
-    const role = await roleRepository.findById(user.role_id); 
-    console.log(role);
+    const role = await roleRepository.findByIdentifier(user.role_id);
+    
     if (!role || role.description !== 'teacher') {
       return response.status(401).json({ message: 'Unauthorized' });
     }
