@@ -1,5 +1,6 @@
 import { Pool, PoolClient } from "pg";
 import { env } from "@/env";
+import { databaseInitialQuery } from "./init";
 
 const CONFIG = {
   user: env.DB_USER,
@@ -18,8 +19,12 @@ export class Database {
   }
 
   public async connection() {
+    console.info("Connecting to the database...");
     try {
       this.client = await this.pool.connect();
+      console.info("Connection to the database was successful");
+      console.info("Running initial database query...");
+      await this.client.query(databaseInitialQuery);
     } catch (error) {
       console.error(`Error connecting to the database: ${error}`);
       throw new Error(`Error connecting to the database: ${error}`);
@@ -30,7 +35,7 @@ export class Database {
     try {
       console.info("Testing connection to the database...");
       await this.client?.query("SELECT NOW()");
-      console.info("Connection to the database was successful");
+      console.info("Connection to the database is working");
     } catch (error) {
       console.error(`Error testing connection to the database: ${error}`);
       throw new Error(`Error testing connection to the database: ${error}`);

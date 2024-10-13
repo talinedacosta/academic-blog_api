@@ -132,7 +132,8 @@ export async function create(request: Request, response: Response, next: NextFun
     const createPostUseCase = new CreatePostUseCase(postRepository);
 
     const post = new Post(title, content);
-    post.created_at = new Date();    
+    post.created_at = new Date();  
+    post.updated_by = user.id;  
 
    const result = await createPostUseCase.handler(post, user);
 
