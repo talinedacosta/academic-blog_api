@@ -1,3 +1,6 @@
+/**
+ * User entity
+ */
 export class User {
   id?: number;
   name: string;
