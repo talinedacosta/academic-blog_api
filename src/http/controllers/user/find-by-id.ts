@@ -8,6 +8,84 @@ import { JwtPayload } from "jsonwebtoken";
 import { User } from "@/entities/user.entity";
 import { RoleRepository } from "@/repositories/pg/role.repository";
 
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     summary: Get user by ID
+ *     description: This endpoint allows a user with the role of 'teacher' to retrieve user details by ID. Authorization token must be set in the request header.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []  # Assuming you are using bearer token for authorization
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the user to be retrieved.
+ *       - in: header
+ *         name: Authorization
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Bearer token for authorization (e.g., "Bearer your_token_here")
+ *     responses:
+ *       200:
+ *         description: User retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: The ID of the user.
+ *                   example: 1
+ *                 name:
+ *                   type: string
+ *                   description: The name of the user.
+ *                   example: "John Doe"
+ *                 email:
+ *                   type: string
+ *                   description: The email of the user.
+ *                   example: "john.doe@example.com"
+ *                 role_id:
+ *                   type: integer
+ *                   description: The role ID associated with the user.
+ *                   example: 2
+ *       401:
+ *         description: Unauthorized - User does not have permission to view user details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Unauthorized"
+ *       404:
+ *         description: Not Found - User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User not found"
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal Server Error"
+ */
+
 export async function findById(request: Request, response: Response, next: NextFunction) {
   try {
     const registerBodySchema = z.object({

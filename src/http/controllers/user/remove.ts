@@ -8,6 +8,62 @@ import { JwtPayload } from "jsonwebtoken";
 import { RoleRepository } from "@/repositories/pg/role.repository";
 import { CustomRequest } from "@/middlewares/auth";
 
+/**
+ * @swagger
+ * /users/{id}:
+ *   delete:
+ *     summary: Remove a user by ID
+ *     description: This endpoint allows a user with the role of 'teacher' to remove a user by ID. Authorization token must be set in the request header.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []  # Assuming you are using bearer token for authorization
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the user to be removed.
+ *       - in: header
+ *         name: Authorization
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Bearer token for authorization (e.g., "Bearer your_token_here")
+ *     responses:
+ *       204:
+ *         description: User removed successfully
+ *       401:
+ *         description: Unauthorized - User does not have permission to remove a user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Unauthorized"
+ *       400:
+ *         description: Bad Request - User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User not found"
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal Server Error"
+ */
 export async function remove(request: Request , response: Response, next: NextFunction) {
   try {
     const registerBodySchema = z.object({
