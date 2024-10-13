@@ -4,7 +4,7 @@ import { env } from "@/env";
 const CONFIG = {
   user: env.DB_USER,
   host: env.DB_HOST,
-  database: env.DB_NAME,
+  database: env.NODE_ENV === "test" ? env.DB_NAME_TEST : env.DB_NAME,
   password: env.DB_PASS,
   port: env.DB_PORT,
 };
@@ -15,10 +15,9 @@ export class Database {
 
   constructor() {
     this.pool = new Pool(CONFIG);
-    this.connection();
   }
 
-  private async connection() {
+  public async connection() {
     try {
       this.client = await this.pool.connect();
     } catch (error) {
@@ -36,6 +35,17 @@ export class Database {
       console.error(`Error testing connection to the database: ${error}`);
       throw new Error(`Error testing connection to the database: ${error}`);
     }
+  }
+
+  public async releaseConnection() {
+    if (this.client) {
+      this.client.release();
+      this.client = undefined;
+    }
+  }
+
+  public async closePool() {
+    await this.pool.end();
   }
 
   get clientInstance(): PoolClient {

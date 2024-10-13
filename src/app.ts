@@ -6,6 +6,9 @@ import { globalErrorHandler } from "./utils/global-error-handler";
 export const app = express();
 app.use(express.json({ limit: "10mb" }));
 
+app.get("/", (_, res) => {
+  res.status(200).send("Hello World!");
+});
 app.use(postsRoutes);
 app.use(userRoutes);
 app.use(globalErrorHandler);

@@ -10,7 +10,7 @@ export async function findAll(request: Request, response: Response, next: NextFu
    
    const result = await findAllPostUseCase.handler();
 
-    return response.status(201).json(result);
+    return response.status(200).json(result);
 
   } catch (error) {
     next(error);

@@ -17,7 +17,7 @@ export async function findById(request: Request, response: Response, next: NextF
 
     const result = await findPostByIdUseCase.handler(id);
 
-    return response.status(201).json(result);
+    return response.status(200).json(result);
   } catch (error) {
     next(error);
   }

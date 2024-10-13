@@ -30,8 +30,9 @@ export async function findById(request: Request, response: Response, next: NextF
     const findUserByIdUseCase = new FindUserByIdUseCase(userRepository);
 
     const result = await findUserByIdUseCase.handler(id);
+    const { password, ...data } = result;
 
-    return response.status(201).json(result);
+    return response.status(200).json(data);
   } catch (error) {
     next(error);
   }

@@ -9,4 +9,5 @@ app.listen(PORT, HOST, () => {
   console.log(`Server is running at http://${HOST}:${PORT}`);
 });
 
+database.connection();
 database.testConnection();

@@ -31,9 +31,9 @@ export async function login(request: Request, response: Response, next: NextFunc
       return response.status(400).json({ message: 'Password incorrect' });
     }
 
-    const token = jwt.sign({ id: user.id, name: user.name, role_id: user.role_id }, env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, name: user.name, role_id: user.role_id }, env.JWT_SECRET, { expiresIn: '2h' });
     
-    return response.status(201).json({
+    return response.status(200).json({
       token,
       user: {
         id: user.id,
