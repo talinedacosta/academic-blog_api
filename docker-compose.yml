@@ -21,6 +21,7 @@ services:
 
   api:
     container_name: academic_blog_api
+    image: talinedacosta/fiap_academic_blog:latest
     build:
       context: .
     restart: always
