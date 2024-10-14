@@ -128,6 +128,7 @@ export class PostRepository extends Repository<Post> implements IPostRepository 
    * @returns boolean
    */
   public async remove(id: number): Promise<boolean> {
+    const resultPosts = await this.connection.query(`DELETE FROM post WHERE created_by = $1`, [id]);    
     const result = await this.connection.query(`DELETE FROM ${this.table} WHERE id = $1`, [id]);
 
     return result.rowCount === 1;
