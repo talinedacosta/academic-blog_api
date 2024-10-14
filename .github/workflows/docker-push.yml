@@ -6,12 +6,37 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js (ou outra tecnologia)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
         uses: actions/checkout@v3
+
+      # Run tests before building the image
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          sleep 5
 
       # Configura o Docker Buildx
       - name: Set up Docker Buildx
