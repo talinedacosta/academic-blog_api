@@ -98,6 +98,15 @@ A API estará rodando na porta http://localhost:3000 e o banco na porta http://l
 ```
 
 Adicione o arquivo .env no projeto com base no .env.sample
+- ENV=
+- PORT=
+- DB_HOST=
+- DB_PORT=
+- DB_USER=
+- DB_PASS=
+- DB_NAME=
+- DB_NAME_TEST=
+- JWT_SECRET=
 
 ```bash
   # Etapa 3 - Rode o projeto
@@ -110,17 +119,11 @@ A API estará rodando na porta http://localhost:3000 e o banco na porta http://l
 #### Executando testes do projeto
 Crie uma database para testes baseada no banco que você criou anteriormente, informe o nome do banco no env DB_NAME_TEST.
 
-- ENV=
-- PORT=
-- DB_HOST=
-- DB_PORT=
-- DB_USER=
-- DB_PASS=
-- DB_NAME=
-- DB_NAME_TEST=
-- JWT_SECRET=
-
 ```bash
   # Etapa 1 - Rode os testes
   npm run test
 ```
+
+## Documentação da API
+
+Com a aplicação rodando localmente, você poderá ver o swagger da aplicação através do link http://localhost:3000/api-docs/
