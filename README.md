@@ -157,7 +157,7 @@ Com a aplicação rodando localmente, você poderá ver o swagger da aplicação
 | `name` | `string` | **Obrigatório**. Nome completo do usuário. |
 | `email` | `string` | **Obrigatório**. E-mail do usuário. |
 | `password` | `string` | **Obrigatório**. Senha. |
-| `role_id` | `string` | **Obrigatório**. Permissão do usuário. |
+| `role_id` | `number` | **Obrigatório**. Permissão do usuário. |
 
 Para criar um usuário é necessário enviar o tipo de permissão que ele terá, a propriedade de chama **role_id** e ela tem duas opções
 
@@ -206,7 +206,7 @@ Todos os posts que o usuário criou também serão removidos.
 #### Criar posts
 
 ```http
-  POST /post
+  POST /posts
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
