@@ -28,7 +28,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
   }
 
   /**
-   * Find all users
+   * Update user
    * @returns Array<User>
    */
   public async update({ name, id }: User): Promise<User | null> {
@@ -53,7 +53,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
   }
 
   /**
-   * Find all users
+   * Remove user
    * @returns Array<User>
    */
   public async remove(id: number): Promise<boolean> {
@@ -63,7 +63,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
   }
 
   /**
-   * Find all users
+   * Find user by email
    * @returns Array<User>
    */
   public async findByEmail(email: string): Promise<User | null> {
@@ -75,7 +75,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
   }
 
   /**
-   * Find all users
+   * Find user by id
    * @returns Array<User>
    */
   public async findById(id: number): Promise<User | null> {
@@ -84,5 +84,29 @@ export class UserRepository extends Repository<User> implements IUserRepository 
     if (result.rowCount === 0) return null;
 
     return result.rows[0];
+  }
+
+   /**
+   * Find all users
+   * @returns Array<User>
+   */
+   public async findAll(): Promise<User[] | null> {
+    const result = await this.connection.query(`SELECT * FROM "${this.table}"`);
+
+    if (result.rowCount === 0) return null;
+
+    return result.rows;
+  }
+
+  /**
+   * Find all users by role
+   * @returns Array<User>
+   */
+  public async findAllByRole(role: number): Promise<User[] | null> {
+    const result = await this.connection.query(`SELECT * FROM "${this.table}" WHERE role_id = $1`, [role]);
+
+    if (result.rowCount === 0) return null;
+
+    return result.rows;
   }
 }

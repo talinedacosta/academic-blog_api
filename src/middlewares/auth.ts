@@ -20,6 +20,7 @@ export const auth = (request: Request, response: Response, next: NextFunction) =
 
     next();
   } catch (error) {
+    console.error(error)
     return response.status(401).json({ message: "Token invalid or expired" });
   }
 };

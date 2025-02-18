@@ -4,6 +4,8 @@ export interface IUserRepository {
   findById(id: number): Promise<User | null>;
   findByIdentifier(id: number): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
+  findAll(): Promise<User[] | null>;
+  findAllByRole(role: number): Promise<User[] | null>;
   create(user: User): Promise<User>;
   update(user: User): Promise<User | null>;
   updatePassword(user: User): Promise<User | null>;
