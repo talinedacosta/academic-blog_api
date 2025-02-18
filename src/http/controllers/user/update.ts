@@ -33,7 +33,7 @@ export async function update(request: Request, response: Response, next: NextFun
     }
 
     const updateUserUseCase = new UpdateUserUseCase(userRepository);
-    const newPassword = await bcrypt.hash(password, 10);
+    const newPassword = password ? await bcrypt.hash(password, 10) : userExists!.password;
 
     const user = new User(name, email, newPassword, role_id);
 
