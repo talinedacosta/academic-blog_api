@@ -31,8 +31,8 @@ export class UserRepository extends Repository<User> implements IUserRepository 
    * Update user
    * @returns Array<User>
    */
-  public async update({ name, id }: User): Promise<User | null> {
-    const result = await this.connection.query(`UPDATE "${this.table}" SET name = $1 WHERE id = $2 RETURNING *`, [name, id]);
+  public async update({ name, email, password, role_id, id }: User): Promise<User | null> {
+    const result = await this.connection.query(`UPDATE "${this.table}" SET name = $1, email = $3, password = $4, role_id = $5 WHERE id = $2 RETURNING *`, [name, id, email, password, role_id]);
 
     if (result.rowCount === 0) return null;
 

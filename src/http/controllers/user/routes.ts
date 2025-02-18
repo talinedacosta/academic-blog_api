@@ -6,6 +6,7 @@ import { login } from "./login";
 import { remove } from "./remove";
 import { findAllByRole } from "./find-all-by-role";
 import { findAll } from "./find-all";
+import { update } from "./update";
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.get("/user/:id", auth, findById);
 router.delete("/user/:id", auth, remove);
 router.get("/users", auth, findAll);
 router.get("/users/:role", auth, findAllByRole);
+router.put("/user/:id", auth, update);
 
 export default router;
