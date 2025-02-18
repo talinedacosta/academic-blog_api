@@ -91,7 +91,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
    * @returns Array<User>
    */
    public async findAll(): Promise<User[] | null> {
-    const result = await this.connection.query(`SELECT * FROM "${this.table}"`);
+    const result = await this.connection.query(`SELECT name, email, id, role_id, created_at FROM "${this.table}"`);
 
     if (result.rowCount === 0) return null;
 
@@ -103,7 +103,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
    * @returns Array<User>
    */
   public async findAllByRole(role: number): Promise<User[] | null> {
-    const result = await this.connection.query(`SELECT * FROM "${this.table}" WHERE role_id = $1`, [role]);
+    const result = await this.connection.query(`SELECT name, email, id, role_id, created_at FROM "${this.table}" WHERE role_id = $1`, [role]);
 
     if (result.rowCount === 0) return null;
 
