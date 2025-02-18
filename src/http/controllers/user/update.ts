@@ -16,14 +16,19 @@ export async function update(request: Request, response: Response, next: NextFun
       role_id: z.number(),
     });
 
+    const registerParamsSchema = z.object({
+      id: z.coerce.number(),
+    });
+
     const { name, email, password, role_id } = registerBodySchema.parse(request.body);
+    const { id } = registerParamsSchema.parse(request.params);
 
     const userRepository = new UserRepository(database.clientInstance);
     const findUserByEmailUseCase = new FindUserByEmailUseCase(userRepository);
 
     const userExists = await findUserByEmailUseCase.handler(email);
 
-    if (userExists) {
+    if (userExists && userExists.id !== id) {
       return response.status(400).json({ message: "This email has already been used" });
     }
 
