@@ -37,7 +37,7 @@ export async function update(request: Request, response: Response, next: NextFun
 
     const user = new User(name, email, newPassword, role_id);
 
-    const result = await updateUserUseCase.handler(user);
+    const result = await updateUserUseCase.handler({ id, ...user });
 
     return response.status(201).json(result);
   } catch (error) {
